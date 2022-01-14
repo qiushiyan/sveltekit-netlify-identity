@@ -16,7 +16,9 @@
 </script>
 
 <div class="guides">
-  {#if guides.length > 0}
+  {#if !$auth.authReady}
+    <p>loading ... {$auth.authReady}</p>
+  {:else if guides.length > 0}
     <ul>
       {#each guides as guide}
         <li>

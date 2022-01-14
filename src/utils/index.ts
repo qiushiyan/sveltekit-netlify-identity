@@ -4,7 +4,9 @@ import { auth } from "../store/";
 export const setupAuth = () => {
   netlifyIdentity.init();
 
-  netlifyIdentity.on("init", () => {});
+  netlifyIdentity.on("init", () => {
+    auth.ready();
+  });
 
   netlifyIdentity.on("login", (user) => {
     const email = user.email;
