@@ -8,4 +8,4 @@ An app made with sveltekit, netlify identity and functions.
 
 known issues :
 
-- `/guides` does not automatically refresh (`onmount` not being triggered somehow) after log in
+- `/guides` does not automatically refresh (`onMount` not being triggered somehow) after log in

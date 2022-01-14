@@ -1,16 +1,9 @@
 <script lang="ts">
   import "../../styles/app.css";
   import netlifyIdentity from "netlify-identity-widget";
-  import { onMount } from "svelte";
   import { auth } from "../../store";
   import Button from "$lib/button.svelte";
   import Title from "$lib/title.svelte";
-  import { setupAuth } from "../../utils";
-  onMount(() => {
-    netlifyIdentity.init();
-
-    setupAuth();
-  });
 
   const handleLogin = () => {
     netlifyIdentity.open();
@@ -28,7 +21,7 @@
       {#if $auth.email}
         <p on:click={handleLogout}>hi, {$auth.username}</p>
       {:else}
-        <Button on:click={handleLogin}>login in</Button>
+        <Button on:click={handleLogin}>log in</Button>
       {/if}
       <a href="/">Home</a>
       <a href="/about">About</a>
