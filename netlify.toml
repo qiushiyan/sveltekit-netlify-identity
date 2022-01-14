@@ -7,7 +7,7 @@
 [dev]
     command = "svelte-kit dev"
 
-[[redirects]]
+[[_redirects]]
     from = '/api/*'
     to = '/.netlify/functions/:splat'
     status = 200
