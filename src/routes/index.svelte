@@ -1,27 +1,8 @@
 <script lang="ts">
   import { auth } from "../store/";
-  import Button from "$lib/button.svelte";
-  import { onMount } from "svelte";
-  import netlifyIdentity from "netlify-identity-widget";
-  import { setupAuth } from "../utils";
-
-  onMount(() => {
-    setupAuth();
-  });
-
-  const handleLogout = () => {
-    netlifyIdentity.logout();
-    auth.logout();
-  };
 </script>
 
 <div class="index">
-  {#if $auth.email}
-    <Button on:click={() => netlifyIdentity.open()}>login in</Button>
-  {:else}
-    <Button on:click={() => handleLogout()}>login out</Button>
-  {/if}
-
   <h2>
     Welcome
     {#if $auth.email}

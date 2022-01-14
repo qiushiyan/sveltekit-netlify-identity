@@ -1,31 +1,38 @@
-<script context="module" lang="ts">
-  import type { Load } from "@sveltejs/kit";
-  export const load: Load = async ({ fetch }) => {
-    const res = await fetch("/.netlify/functions/guides");
-    const data = await res.json();
-    console.log(data);
-    if (res.ok && data.guides) {
-      return {
-        props: { guides: data.guides },
-      };
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { auth } from "../../store";
+  let guides = [];
+
+  onMount(async () => {
+    if ($auth.authReady) {
+      const res = await fetch(
+        "/.netlify/functions/guides",
+        $auth.email && {
+          headers: {
+            Authorization: `Bearer ${$auth.token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+      console.log(data);
+      guides = data.guides;
     }
-
-    return { status: 401, error: data.msg };
-  };
-</script>
-
-<script>
-  export let guides;
+  });
 </script>
 
 <div class="guides">
-  <ul>
-    {#each guides as guide}
-      <li>
-        <a sveltekit:prefetch href={`/guides/${guide.id}`}>{guide.title}</a>
-      </li>
-    {/each}
-  </ul>
+  {#if $auth.email}
+    <ul>
+      {#each guides as guide}
+        <li>
+          <a sveltekit:prefetch href={`/guides/${guide.id}`}>{guide.title}</a>
+        </li>
+      {/each}
+    </ul>
+  {:else}
+    <p>sorry you need to be logged in to see this</p>
+  {/if}
 </div>
 
 <style>
