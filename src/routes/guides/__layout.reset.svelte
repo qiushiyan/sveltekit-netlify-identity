@@ -1,21 +1,18 @@
 <script>
-  import Title from "$lib/title.svelte";
   import "../../styles/app.css";
   import netlifyIdentity from "netlify-identity-widget";
   import { onMount } from "svelte";
   import { auth } from "../../store";
+  import Button from "$lib/button.svelte";
+  import Title from "$lib/title.svelte";
   onMount(() => {
     netlifyIdentity.init();
 
     netlifyIdentity.on("login", (user) => {
-      console.log(user);
-      const { user_metadata } = user;
-      const { full_name } = user_metadata;
-      auth.login(full_name);
-    });
-
-    netlifyIdentity.on("logout", () => {
-      auth.logout();
+      const email = user.email;
+      const username = user.user_metadata.full_name;
+      auth.login(username, email);
+      netlifyIdentity.close();
     });
   });
 
@@ -25,6 +22,7 @@
 
   const handleLogout = () => {
     netlifyIdentity.logout();
+    auth.logout();
   };
 </script>
 
@@ -32,9 +30,11 @@
   <nav>
     <Title title="Ninja Gaming Guides" />
     <div class="links">
-      <button on:click|preventDefault={handleLogin}>login in</button>
-      <button on:click|preventDefault={handleLogout}>log out</button>
-      <p>user {$auth.user}</p>
+      {#if $auth.email}
+        <p on:click={handleLogout}>hi, {$auth.username}</p>
+      {:else}
+        <Button on:click={handleLogin}>login in</Button>
+      {/if}
       <a href="/">Home</a>
       <a href="/about">About</a>
       <a href="/guides">Guides</a>
@@ -71,5 +71,12 @@
   }
   a {
     margin-left: 10px;
+  }
+
+  p {
+    margin-left: 10px;
+    font-size: 0.8em;
+    display: inline;
+    text-decoration: underline;
   }
 </style>

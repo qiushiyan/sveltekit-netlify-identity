@@ -2,14 +2,18 @@ import { writable } from "svelte/store";
 
 const useAuth = () => {
   const { subscribe, set, update } = writable({
-    user: null,
-    authReady: false,
+    username: null,
+    email: null,
   });
 
   return {
     subscribe,
-    login: (user) => update((auth) => (auth.user = user)),
-    logout: () => update((auth) => (auth.user = null)),
+    login: (username: string, email: string) => {
+      set({ username, email });
+    },
+    logout: () => {
+      set({ username: null, email: null });
+    },
   };
 };
 

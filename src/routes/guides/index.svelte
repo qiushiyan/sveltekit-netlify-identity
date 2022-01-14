@@ -1,16 +1,16 @@
 <script context="module" lang="ts">
   import type { Load } from "@sveltejs/kit";
   export const load: Load = async ({ fetch }) => {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-
-    const guides = await res.json();
-    if (res.ok) {
+    const res = await fetch("/.netlify/functions/guides");
+    const data = await res.json();
+    console.log(data);
+    if (res.ok && data.guides) {
       return {
-        props: { guides },
+        props: { guides: data.guides },
       };
     }
 
-    return { status: res.status, redirect: "/guides" };
+    return { status: 401, error: data.msg };
   };
 </script>
 
