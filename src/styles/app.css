@@ -1,0 +1,14 @@
+body {
+  background: #422d5d;
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+a,
+p,
+li {
+  color: #decff1;
+  font-weight: normal;
+}
