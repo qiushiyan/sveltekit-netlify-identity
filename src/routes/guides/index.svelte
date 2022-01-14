@@ -15,14 +15,13 @@
       );
 
       const data = await res.json();
-      console.log(data);
       guides = data.guides;
     }
   });
 </script>
 
 <div class="guides">
-  {#if $auth.email}
+  {#if guides.length > 0}
     <ul>
       {#each guides as guide}
         <li>
