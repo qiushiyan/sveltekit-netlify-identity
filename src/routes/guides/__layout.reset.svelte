@@ -6,10 +6,22 @@
   import { auth } from "../../store";
   onMount(() => {
     netlifyIdentity.init();
+
+    netlifyIdentity.on("login", (user) => {
+      auth.login(user);
+    });
+
+    netlifyIdentity.on("logout", () => {
+      console.log("logged out");
+    });
   });
 
   const handleLogin = () => {
     netlifyIdentity.open();
+  };
+
+  const handleLogout = () => {
+    netlifyIdentity.logout();
   };
 </script>
 
@@ -18,6 +30,8 @@
     <Title title="Ninja Gaming Guides" />
     <div class="links">
       <button on:click|preventDefault={handleLogin}>login in</button>
+      <button on:click|preventDefault={handleLogout}>log out</button>
+      <p>user {$auth.user}</p>
       <a href="/">Home</a>
       <a href="/about">About</a>
       <a href="/guides">Guides</a>
