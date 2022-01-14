@@ -19,3 +19,18 @@ export const setupAuth = () => {
     netlifyIdentity.close();
   });
 };
+
+export const fetchGuides = async (email: string, token: string) => {
+  const res = await fetch(
+    "/.netlify/functions/guides",
+    email && {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  // {msg} when error, {guides} when success
+
+  const data = await res.json();
+  return data;
+};

@@ -1,21 +1,13 @@
 <script lang="ts">
+  import { fetchGuides } from "../../utils/";
+
   import { onMount } from "svelte";
   import { auth } from "../../store";
   let guides = [];
 
   onMount(async () => {
     if ($auth.authReady) {
-      const res = await fetch(
-        "/.netlify/functions/guides",
-        $auth.email && {
-          headers: {
-            Authorization: `Bearer ${$auth.token}`,
-          },
-        }
-      );
-
-      const data = await res.json();
-      // {msg} when error, {guides} when success
+      const data = await fetchGuides($auth.email, $auth.token);
       if (data.guides) {
         guides = data.guides;
       }
