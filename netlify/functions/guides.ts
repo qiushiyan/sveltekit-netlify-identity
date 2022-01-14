@@ -1,7 +1,7 @@
 import { Handler } from "@netlify/functions";
 
 export const handler: Handler = async (event, context) => {
-  if (event.httpMethod !== "GET") {
+  if (event.httpMethod === "GET") {
     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
 
     const guides = await res.json();
