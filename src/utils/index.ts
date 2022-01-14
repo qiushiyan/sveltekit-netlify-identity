@@ -13,4 +13,9 @@ export const setupAuth = () => {
     auth.login(username, email, token);
     netlifyIdentity.close();
   });
+
+  netlifyIdentity.on("logout", () => {
+    auth.logout();
+    netlifyIdentity.close();
+  });
 };

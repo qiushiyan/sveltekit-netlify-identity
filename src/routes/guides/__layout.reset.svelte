@@ -16,7 +16,6 @@
 
   const handleLogout = () => {
     netlifyIdentity.logout();
-    auth.logout();
   };
 </script>
 
