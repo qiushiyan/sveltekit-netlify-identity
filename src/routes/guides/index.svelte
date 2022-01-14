@@ -15,7 +15,10 @@
       );
 
       const data = await res.json();
-      guides = data.guides;
+      // {msg} when error, {guides} when success
+      if (data.guides) {
+        guides = data.guides;
+      }
     }
   });
 </script>
