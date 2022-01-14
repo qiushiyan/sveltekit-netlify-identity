@@ -9,6 +9,8 @@
 
     netlifyIdentity.on("login", (user) => {
       auth.login(user);
+      netlifyIdentity.close();
+      console.log(`user logged in as`, user);
     });
 
     netlifyIdentity.on("logout", () => {
