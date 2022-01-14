@@ -1,11 +1,20 @@
 <script lang="ts">
   import { fetchGuides } from "../../utils/";
 
-  import { onMount } from "svelte";
+  import { afterUpdate } from "svelte";
   import { auth } from "../../store";
   let guides = [];
 
-  onMount(async () => {
+  // onMount(async () => {
+  //   if ($auth.authReady) {
+  //     const data = await fetchGuides($auth.email, $auth.token);
+  //     if (data.guides) {
+  //       guides = data.guides;
+  //     }
+  //   }
+  // });
+
+  afterUpdate(async () => {
     if ($auth.authReady) {
       const data = await fetchGuides($auth.email, $auth.token);
       if (data.guides) {
