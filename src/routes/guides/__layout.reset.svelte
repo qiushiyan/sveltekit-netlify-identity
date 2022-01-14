@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import "../../styles/app.css";
   import netlifyIdentity from "netlify-identity-widget";
   import { onMount } from "svelte";
@@ -7,6 +7,8 @@
   import Title from "$lib/title.svelte";
   import { setupAuth } from "../../utils";
   onMount(() => {
+    netlifyIdentity.init();
+
     setupAuth();
   });
 

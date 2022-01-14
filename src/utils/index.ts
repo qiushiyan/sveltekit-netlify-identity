@@ -3,6 +3,7 @@ import { auth } from "../store/";
 
 export const setupAuth = () => {
   netlifyIdentity.init();
+  auth.ready();
 
   netlifyIdentity.on("init", () => {
     auth.ready();

@@ -1,5 +1,13 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { setupAuth } from "../utils";
+
   import { auth } from "../store/";
+  onMount(() => {
+    setupAuth();
+    console.log("auth setup");
+    console.log($auth.authReady);
+  });
 </script>
 
 <div class="index">
