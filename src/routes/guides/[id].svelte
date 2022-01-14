@@ -16,10 +16,13 @@
 </script>
 
 <script lang="ts">
+  import { auth } from "../../store/";
+
   export let guide;
 </script>
 
 <div class="guide">
+  <p>{$auth.user}</p>
   <h2>{guide.title}</h2>
   <p>{guide.body}</p>
 </div>

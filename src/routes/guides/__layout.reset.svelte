@@ -8,13 +8,13 @@
     netlifyIdentity.init();
 
     netlifyIdentity.on("login", (user) => {
-      auth.login(user);
-      netlifyIdentity.close();
-      console.log(`user logged in as`, user);
+      const { user_metadata } = user;
+      const { full_name } = user_metadata;
+      auth.login(full_name);
     });
 
     netlifyIdentity.on("logout", () => {
-      console.log("logged out");
+      auth.logout();
     });
   });
 
