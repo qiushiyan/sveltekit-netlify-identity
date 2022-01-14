@@ -9,9 +9,7 @@ const useAuth = () => {
   return {
     subscribe,
     login: (user) => update((auth) => (auth.user = user)),
-    logout: () => {
-      (auth) => (auth.user = null);
-    },
+    logout: () => update((auth) => (auth.user = null)),
   };
 };
 

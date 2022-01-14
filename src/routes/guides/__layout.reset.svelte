@@ -8,6 +8,7 @@
     netlifyIdentity.init();
 
     netlifyIdentity.on("login", (user) => {
+      console.log(user);
       const { user_metadata } = user;
       const { full_name } = user_metadata;
       auth.login(full_name);
