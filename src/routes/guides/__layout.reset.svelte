@@ -5,15 +5,9 @@
   import { auth } from "../../store";
   import Button from "$lib/button.svelte";
   import Title from "$lib/title.svelte";
+  import { setupAuth } from "../../utils";
   onMount(() => {
-    netlifyIdentity.init();
-
-    netlifyIdentity.on("login", (user) => {
-      const email = user.email;
-      const username = user.user_metadata.full_name;
-      auth.login(username, email);
-      netlifyIdentity.close();
-    });
+    setupAuth();
   });
 
   const handleLogin = () => {
