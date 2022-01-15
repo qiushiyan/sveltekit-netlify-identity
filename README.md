@@ -5,7 +5,3 @@ An app made with sveltekit, netlify identity and functions.
 - `/guides`: client side rendering because we need to access store values (can't use `context='module'`) and send it to netlify functions `netlify/functions/guides.ts`, which checks if the user is logged in
 
 - `/guides/[id]`: server side rendering with sveltekit API routes
-
-known issues :
-
-- `/guides` does not automatically refresh (`onMount` not being triggered somehow) after log in

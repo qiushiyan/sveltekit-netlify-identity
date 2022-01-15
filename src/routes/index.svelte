@@ -1,16 +1,15 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { setupAuth } from "../utils";
+  import { fade } from "svelte/transition";
 
   import { auth } from "../store/";
   onMount(() => {
     setupAuth();
-    console.log("auth setup");
-    console.log($auth.authReady);
   });
 </script>
 
-<div class="index">
+<div class="index" in:fade>
   <h2>
     Welcome
     {#if $auth.email}

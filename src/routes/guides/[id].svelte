@@ -16,10 +16,11 @@
 </script>
 
 <script lang="ts">
+  import { scale } from "svelte/transition";
   export let guide;
 </script>
 
-<div class="guide">
+<div class="guide" in:scale>
   <h2>{guide.title}</h2>
   <p>{guide.body}</p>
 </div>

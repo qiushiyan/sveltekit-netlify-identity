@@ -1,18 +1,9 @@
 <script lang="ts">
   import { fetchGuides } from "../../utils/";
-
   import { afterUpdate } from "svelte";
   import { auth } from "../../store";
+  import { fly } from "svelte/transition";
   let guides = [];
-
-  // onMount(async () => {
-  //   if ($auth.authReady) {
-  //     const data = await fetchGuides($auth.email, $auth.token);
-  //     if (data.guides) {
-  //       guides = data.guides;
-  //     }
-  //   }
-  // });
 
   afterUpdate(async () => {
     if ($auth.authReady) {
@@ -24,7 +15,7 @@
   });
 </script>
 
-<div class="guides">
+<div class="guides" in:fly>
   {#if !$auth.authReady}
     <p>loading ...</p>
   {:else if guides.length > 0}
