@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { setupAuth } from "../utils";
-  import { fade } from "svelte/transition";
+  import { fly } from "svelte/transition";
 
   import { auth } from "../store/";
   onMount(() => {
@@ -9,7 +9,7 @@
   });
 </script>
 
-<div class="index" in:fade>
+<div class="index" in:fly={{ x: -20 }}>
   <h2>
     Welcome
     {#if $auth.email}

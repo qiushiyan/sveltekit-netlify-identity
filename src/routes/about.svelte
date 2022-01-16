@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { fade } from "svelte/transition";
+  import { fly } from "svelte/transition";
 </script>
 
-<div class="about" in:fade>
+<div class="about" in:fly={{ x: 20 }}>
   <h2>About Us</h2>
   <p>
     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt laborum
